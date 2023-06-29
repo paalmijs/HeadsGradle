@@ -1,0 +1,6 @@
+name: HeadsM
+version: 1.0
+main: lv.side.HeadsG.HeadsMain
+api-version: 1.19
+commands:
+  gethead:
