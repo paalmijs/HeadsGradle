@@ -3,6 +3,7 @@ package lv.side.HeadsG;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.util.List;
@@ -16,9 +17,11 @@ public class HeadsMain extends JavaPlugin {
 
         loadConfigValues();
 
+        BukkitRunnable runnable = new MyBukkitRunnable();
         getCommand("gethead").setExecutor(new HeadsCommand(this));
         getCommand("gethead").setTabCompleter(new HeadsCommand(this));
     }
+
 
     @Override
     public void onDisable() {
@@ -26,22 +29,18 @@ public class HeadsMain extends JavaPlugin {
     }
 
     private void loadConfigValues() {
+        saveDefaultConfig();
+        FileConfiguration config = getConfig();
 
-        File dataFolder = getDataFolder();
-
-
-        File configFile = new File(dataFolder, "config.yml");
-        if (configFile.exists()) {
-
-            FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-            headOptions = config.getStringList("head-options");
-        } else {
-            getLogger().warning("Config file not found. Creating a new one.");
-            saveDefaultConfig();
-        }
+        headOptions = config.getStringList("head-options");
     }
 
     public List<String> getHeadOptions() {
         return headOptions;
+    }
+}
+class MyBukkitRunnable extends BukkitRunnable {
+    public void run() {
+
     }
 }
