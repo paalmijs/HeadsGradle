@@ -18,7 +18,6 @@ public class HeadsMain extends JavaPlugin {
 
         headsCommand = new HeadsCommand(this);
         getCommand("gethead").setExecutor(headsCommand);
-        getCommand("gethead").setTabCompleter(headsCommand);
     }
 
     @Override
