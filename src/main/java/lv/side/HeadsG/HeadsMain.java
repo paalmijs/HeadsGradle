@@ -8,16 +8,18 @@ import java.util.List;
 public class HeadsMain extends JavaPlugin {
     private List<String> headOptions;
 
+    private HeadsCommand headsCommand;
+
     @Override
     public void onEnable() {
         getLogger().info("HeadsM has been enabled!");
 
         loadConfigValues();
 
-        getCommand("gethead").setExecutor(new HeadsCommand(this));
-        getCommand("gethead").setTabCompleter(new HeadsCommand(this));
+        headsCommand = new HeadsCommand(this);
+        getCommand("gethead").setExecutor(headsCommand);
+        getCommand("gethead").setTabCompleter(headsCommand);
     }
-
 
     @Override
     public void onDisable() {
@@ -33,5 +35,9 @@ public class HeadsMain extends JavaPlugin {
 
     public List<String> getHeadOptions() {
         return headOptions;
+    }
+
+    public HeadsCommand getHeadsCommand() {
+        return headsCommand;
     }
 }
